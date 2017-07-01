@@ -1,27 +1,25 @@
 import { NgModule, ModuleWithProviders } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 
 import { ToolbarComponent } from './toolbar/toolbar.component';
 import { NavbarComponent } from './navbar/navbar.component';
-import { NameListService } from './name-list/name-list.service';
-
-/**
- * Do not specify providers for modules that might be imported by a lazy loaded module.
- */
+import { RobinhoodService, } from './api/robinhood.service';
+import { AccountsAPI } from './api/accounts.api';
+import { LoginAPI } from './api/login.api';
 
 @NgModule({
-  imports: [CommonModule, RouterModule],
-  declarations: [ToolbarComponent, NavbarComponent],
-  exports: [ToolbarComponent, NavbarComponent,
-    CommonModule, FormsModule, RouterModule]
+    imports: [CommonModule, RouterModule],
+    declarations: [ToolbarComponent, NavbarComponent],
+    exports: [ToolbarComponent, NavbarComponent,
+        CommonModule, FormsModule, RouterModule, ReactiveFormsModule]
 })
 export class SharedModule {
-  static forRoot(): ModuleWithProviders {
-    return {
-      ngModule: SharedModule,
-      providers: [NameListService]
-    };
-  }
+    static forRoot(): ModuleWithProviders {
+        return {
+            ngModule: SharedModule,
+            providers: [LoginAPI, AccountsAPI, RobinhoodService]
+        };
+    }
 }

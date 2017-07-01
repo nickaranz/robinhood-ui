@@ -1,56 +1,37 @@
 import { Component, OnInit } from '@angular/core';
-import { NameListService } from '../shared/name-list/name-list.service';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms'
 
-/**
- * This class represents the lazy loaded HomeComponent.
- */
+import { RobinhoodService } from '../shared/api/robinhood.service';
+
 @Component({
-  moduleId: module.id,
-  selector: 'sd-home',
-  templateUrl: 'home.component.html',
-  styleUrls: ['home.component.css'],
+    moduleId: module.id,
+    selector: 'sd-home',
+    templateUrl: 'home.component.html',
+    styleUrls: ['home.component.css'],
 })
 export class HomeComponent implements OnInit {
 
-  newName: string = '';
-  errorMessage: string;
-  names: any[] = [];
+    loginForm: FormGroup;
+    mfaEnable: boolean = false;
 
-  /**
-   * Creates an instance of the HomeComponent with the injected
-   * NameListService.
-   *
-   * @param {NameListService} nameListService - The injected NameListService.
-   */
-  constructor(public nameListService: NameListService) {}
+    constructor(public robinhoodApi: RobinhoodService) {
+        let fb = new FormBuilder();
+        this.loginForm = fb.group({
+            username: ['', [Validators.required]],
+            password: ['', [Validators.required]],
+            code: ['',]
+        });
+    }
 
-  /**
-   * Get the names OnInit
-   */
-  ngOnInit() {
-    this.getNames();
-  }
+    ngOnInit() {
 
-  /**
-   * Handle the nameListService observable
-   */
-  getNames() {
-    this.nameListService.get()
-      .subscribe(
-        names => this.names = names,
-        error => this.errorMessage = <any>error
-      );
-  }
+    }
 
-  /**
-   * Pushes a new name onto the names array
-   * @return {boolean} false to prevent default form submit behavior to refresh the page.
-   */
-  addName(): boolean {
-    // TODO: implement nameListService.post
-    this.names.push(this.newName);
-    this.newName = '';
-    return false;
-  }
+    login(event: any) {
+        if (this.loginForm.valid)
+            this.robinhoodApi.Login.Auth(this.loginForm.value.username, this.loginForm.value.password,  this.loginForm.value.code)
+                .subscribe(resp => this.mfaEnable = resp.mfa_required);
+    }
+   
 
 }

@@ -1,10 +1,18 @@
-<p>Howdy! Here's a list of awesome computer scientists. Do you know any others? Add to the list yourself.</p>
-
-<form (submit)="addName()">
-  <input [(ngModel)]="newName" name="newName" placeholder="Awesome Computer Scientist">
-  <button type="submit">Add</button>
+<form [formGroup]="loginForm" (ngSubmit)="login($event)" >
+  <div class="group" *ngIf="!mfaEnable">
+    <input formControlName="username" type="email"><span class="highlight"></span><span class="bar"></span>
+    <label>Username</label>
+  </div>
+  <div class="group" *ngIf="!mfaEnable">
+    <input formControlName="password" type="password"><span class="highlight"></span><span class="bar"></span>
+    <label>Password</label>
+  </div>  
+  <div class="group" *ngIf="mfaEnable">
+    <input formControlName="code" type="text"><span class="highlight"></span><span class="bar"></span>
+    <label>Verification Code</label>
+  </div>   
+  <button type="submit" class="button buttonBlue">Login
+    <div class="ripples buttonRipples"><span class="ripplesCircle"></span></div>
+  </button>
 </form>
 
-<ul>
-  <li *ngFor="let name of names">{{name}}</li>
-</ul>
