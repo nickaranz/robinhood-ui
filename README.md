@@ -3,8 +3,8 @@
 
 # Features
 * Export positions as CSV
-* Export order data as CSV
-* UI Data grid
+* Export transaction data as CSV
+* Portfolio grid view
 * Charts
 
 
