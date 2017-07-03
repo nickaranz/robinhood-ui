@@ -66,8 +66,7 @@ button {
   text-decoration: none;
 }
 a, a:hover, a:visited {
-    color: #18b182;
-        text-decoration: none;
+    color: #18b182;        
 }
 button:hover {
   background-color: #21ce99;
@@ -75,4 +74,14 @@ button:hover {
 
 body .ngx-datatable.material.striped .datatable-row-odd {
     background: rgba(33, 206, 153, 0.25);
+}
+.down, .down a{
+    color: red;
+}
+.up, .up a{
+    color: #21ce99;    
+}
+
+body .mat-slide-toggle.mat-checked:not(.mat-disabled) .mat-slide-toggle-thumb{
+    background-color: #21ce99;
 }

@@ -24,6 +24,7 @@ export class ProjectConfig extends SeedConfig {
             ...this.NPM_DEPENDENCIES,
             // {src: 'jquery/dist/jquery.min.js', inject: 'libs'},
             // {src: 'lodash/lodash.min.js', inject: 'libs'},
+            {src: '@angular/material/prebuilt-themes/purple-green.css', inject: true}
         ];
 
         // Add `local` third-party libraries to be injected/bundled.
@@ -34,7 +35,7 @@ export class ProjectConfig extends SeedConfig {
             { src: 'node_modules/@swimlane/ngx-datatable/release/themes/material.css', inject: true, vendor: false },
             { src: 'node_modules/@swimlane/ngx-datatable/release/assets/icons.css', inject: true, vendor: false }
         ];
-     
+
         this.ROLLUP_INCLUDE_DIR = [
             ...this.ROLLUP_INCLUDE_DIR,
             //'node_modules/moment/**'
@@ -45,10 +46,16 @@ export class ProjectConfig extends SeedConfig {
             //{'node_modules/immutable/dist/immutable.js': [ 'Map' ]},
         ];
 
-        // Add packages (e.g. ng2-translate)
+
         let additionalPackages = [{
+            name: '@angular/material',
+            path: 'node_modules/@angular/material/bundles/material.umd.js',
+            packageMeta: {
+                defaultExtension: 'js'
+            }
+        },
+        {
             name: '@swimlane/ngx-datatable',
-            // Path to the package's bundle
             path: 'node_modules/@swimlane/ngx-datatable/release/index.js'
         }];
 

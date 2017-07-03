@@ -32,6 +32,26 @@ export interface IAccount {
     user: string; //url
     withdrawal_halted: boolean;
 }
+export interface IPorfolio {
+    unwithdrawable_grants: number;
+    account: string;
+    excess_maintenance_with_uncleared_deposits: number;
+    url: string;
+    excess_maintenance: number;
+    market_value: number;
+    withdrawable_amount: number;
+    last_core_market_value: number;
+    unwithdrawable_deposits: number;
+    extended_hours_equity: number;
+    excess_margin: number;
+    excess_margin_with_uncleared_deposits: number;
+    equity: number;
+    last_core_equity: number;
+    adjusted_equity_previous_close: number;
+    equity_previous_close: number;
+    start_date: Date;
+    extended_hours_market_value: number;
+}
 export interface IPositionRaw {
     account: string;//url
     average_buy_price: number;
@@ -97,10 +117,12 @@ export interface IPosition {
     updated_at: Date;
     url: string;//url
     equity: number;
-    total: {
-        return: number,
-        percentage: number
-
+    return: {
+        cost: number;
+        total: number,
+        totalPerc: number,
+        today: number,
+        todayPerc: number,
     };
 }
 export interface IAccountResponse extends IPageCollection {

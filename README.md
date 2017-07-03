@@ -1,7 +1,8 @@
 # robinhood-ui
- A web UI for Robinhood (Free Stock Trading app) powered by Angular (4+). This unsupported project uses the official Robinhood API https://api.robinhood.com/ 
+ A web UI for Robinhood (Free Stock Trading app) powered by Angular (4+) and RxJs. This unsupported project uses the official Robinhood API https://api.robinhood.com/ 
 
 # Features
+* Login with support for two factor auth.
 * Export positions as CSV
 * Export transaction data as CSV
 * Portfolio grid view
