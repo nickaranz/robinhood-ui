@@ -1,8 +1,7 @@
 import { Component } from '@angular/core';
-
+import { Observable } from 'rxjs/Observable';
 import { RobinhoodService } from '../shared/api/robinhood.service';
-
-
+import { IAccountResponse } from '../shared/models/responses';
 @Component({
     moduleId: module.id,
     selector: 'sd-about',
@@ -11,8 +10,9 @@ import { RobinhoodService } from '../shared/api/robinhood.service';
 })
 export class AboutComponent {
 
-    positions: Array<any>;
-
+    positions: Observable<any>;
+    loadingIndicator: boolean = true;
+    columns: Array<any> = [];
     constructor(public robinhoodApi: RobinhoodService) {
     }
 
@@ -20,8 +20,9 @@ export class AboutComponent {
         this.loadPositions();
     }
     loadPositions() {
-        this.robinhoodApi.Accounts.accounts()            
-            .mergeMap((acc: any) => this.robinhoodApi.Accounts.positions(acc.results[0].account_number))
-            .subscribe(data => this.positions = data);
+        this.positions = this.robinhoodApi.Accounts.MyPositions
+            .do(a => console.log(a))
+            .map(x => x.results.filter(x => x.quantity > 0).sort((a, b) => a.equity - b.equity).reverse())
+            .do(() => this.loadingIndicator = false);
     }
 }

@@ -1,12 +1,18 @@
 # robinhood-ui
-Robinhood (Free Stock Trading app) Dashboard powered by Angular (4+). For tooling documentaiton please visit the angular-seed page https://github.com/mgechev/angular-seed/ 
+ A web UI for Robinhood (Free Stock Trading app) powered by Angular (4+). This unsupported project uses the official Robinhood API https://api.robinhood.com/ 
+
+# Features
+* Export positions as CSV
+* Export order data as CSV
+* UI Data grid
+* Charts
+
 
 # How to start
-
+* For tooling documentaiton please visit the angular-seed page https://github.com/mgechev/angular-seed/ 
 **Note** that this project requires node v4.x.x or higher and npm 2.14.7 but in order to be able to take advantage of the complete functionality we **strongly recommend node >=v6.5.0 and npm >=3.10.3**.
 
 In order to start the project use:
-
 
 ```bash
 $ git clone https://github.com/nickaranz/robinhood-ui.git

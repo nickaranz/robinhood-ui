@@ -47,7 +47,7 @@ li {
 }
 
 input {
-  border: 1px solid #106cc8;
+  border: 1px solid #21ce99;
   font-size: 14px;
   height: 40px;
   outline: none;
@@ -55,7 +55,7 @@ input {
 }
 
 button {
-  background-color: #106cc8;
+  background-color: #21ce99;
   border-style: none;
   color: rgba(255, 255, 255, 0.87);
   cursor: pointer;
@@ -65,7 +65,14 @@ button {
   padding: 8px 18px;
   text-decoration: none;
 }
-
+a, a:hover, a:visited {
+    color: #18b182;
+        text-decoration: none;
+}
 button:hover {
-  background-color: #28739e;
+  background-color: #21ce99;
+}
+
+body .ngx-datatable.material.striped .datatable-row-odd {
+    background: rgba(33, 206, 153, 0.25);
 }

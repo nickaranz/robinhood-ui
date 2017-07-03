@@ -8,18 +8,18 @@ import { NavbarComponent } from './navbar/navbar.component';
 import { RobinhoodService, } from './api/robinhood.service';
 import { AccountsAPI } from './api/accounts.api';
 import { LoginAPI } from './api/login.api';
+import { InstrumentsAPI } from './api/instruments.api';
 
 @NgModule({
     imports: [CommonModule, RouterModule],
     declarations: [ToolbarComponent, NavbarComponent],
-    exports: [ToolbarComponent, NavbarComponent,
-        CommonModule, FormsModule, RouterModule, ReactiveFormsModule]
+    exports: [ToolbarComponent, NavbarComponent, CommonModule, FormsModule, RouterModule, ReactiveFormsModule]
 })
 export class SharedModule {
     static forRoot(): ModuleWithProviders {
         return {
             ngModule: SharedModule,
-            providers: [LoginAPI, AccountsAPI, RobinhoodService]
+            providers: [LoginAPI, AccountsAPI, RobinhoodService, InstrumentsAPI]
         };
     }
 }
