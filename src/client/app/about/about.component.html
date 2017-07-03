@@ -1,75 +1,82 @@
-<h1 class='up' *ngIf="portfolio">{{portfolio.equity| currency:'USD':true:'1.0-2'}} ({{ ((portfolio.equity - totalCost ) / portfolio.market_value ) | percent:'1.1-2' }})</h1>
-<input type='text' style='padding:8px;margin:15px auto;width:30%;' placeholder='symbol' (keyup)='search($event)' />
-<span>All  <md-slide-toggle #viewToggle name="viewType" checked='true'>Today</md-slide-toggle></span>
+<md-card class="portfolio-card">
+    <md-card-content>
+        <h1 class='up' *ngIf="portfolio">{{portfolio.equity| currency:'USD':true:'1.0-2'}}
+        </h1>
+        <h2 class="up" *ngIf="portfolio"> {{(viewToggle.checked ? todayChange : totalChange) | currency:'USD':true:'1.0-2' }} 
+            ({{ (viewToggle.checked ? todayChange / portfolio.last_core_market_value : totalChange/ portfolio.equity) | percent:'1.1-2' }})</h2>
+        <p>All  <md-slide-toggle #viewToggle name="viewType" checked='true'>Today</md-slide-toggle></p>
+    </md-card-content>
+    <md-card-content>
+        <input type='text' placeholder='filter by symbol' (keyup)='search($event)' />
+        <button style='float:right' md-button>Export</button>
+        <ngx-datatable class="material fullscreen" [rows]="positions$ | async" [loadingIndicator]="loadingIndicator" [columnMode]="'force'"
+            [headerHeight]="50" [footerHeight]="50" [reorderable]="reorderable" [rowHeight]="50" [rowClass]="getRowClass">
 
-<ngx-datatable class="material fullscreen" [rows]="positions$ | async" [loadingIndicator]="loadingIndicator" [columnMode]="'force'"
-    [headerHeight]="50" [footerHeight]="50" [reorderable]="reorderable" [rowHeight]="50" [rowClass]="getRowClass">
-
-    <ngx-datatable-column name="Stock" prop="instrument">
-        <ng-template let-value="value" ngx-datatable-cell-template>
-            <a [routerLink]="['/portfolio',value.symbol]" title="value.simple_name">{{value.symbol}}</a>
-        </ng-template>
-    </ngx-datatable-column>
-    <ngx-datatable-column name="Shares" prop="quantity">
-        <ng-template let-value="value" ngx-datatable-cell-template>
-            {{value | number:'1.0-0'}}
-        </ng-template>
-    </ngx-datatable-column>
-    <ngx-datatable-column name="Equity" prop="equity">
-        <ng-template let-value="value" ngx-datatable-cell-template>
-            {{value | currency:'USD':true:'1.0-0'}}
-        </ng-template>
-    </ngx-datatable-column>
-    <ngx-datatable-column name="Return" *ngIf="!viewToggle.checked" prop="return.total">
-        <ng-template let-value="value" ngx-datatable-cell-template>
-            {{value | currency:'USD':true:'1.0-0'}}
-        </ng-template>
-    </ngx-datatable-column>
-    <ngx-datatable-column name="%" *ngIf="!viewToggle.checked" prop="return.totalPerc">
-        <ng-template let-value="value" ngx-datatable-cell-template>
-            {{value | percent:'1.1-2' }}
-        </ng-template>
-    </ngx-datatable-column>
-    <ngx-datatable-column name="Return" *ngIf="viewToggle.checked" prop="return.today">
-        <ng-template let-value="value" ngx-datatable-cell-template>
-            {{value | currency:'USD':true}}
-        </ng-template>
-    </ngx-datatable-column>
-    <ngx-datatable-column name="%" *ngIf="viewToggle.checked" prop="return.todayPerc">
-        <ng-template let-value="value" ngx-datatable-cell-template>
-            {{value | percent:'1.1-2' }}
-        </ng-template>
-    </ngx-datatable-column>
-    <ngx-datatable-column name="Avg Cost" prop="average_buy_price">
-        <ng-template let-value="value" ngx-datatable-cell-template>
-            {{value | currency:'USD':true:'1.2-2'}}
-        </ng-template>
-    </ngx-datatable-column>
-    <ngx-datatable-column name="Last Price" prop="instrument.last_trade_price">
-        <ng-template let-value="value" ngx-datatable-cell-template>
-            {{value | currency:'USD':true:'1.2-2'}}
-        </ng-template>
-    </ngx-datatable-column>
-    <ngx-datatable-column name="Div" prop="instrument.dividend_yield">
-        <ng-template let-value="value" ngx-datatable-cell-template>
-            {{(value) ? ((value/100) | percent: '1.1-2') : '0.0%' }}
-        </ng-template>
-    </ngx-datatable-column>
-    <ngx-datatable-column name="Day Volume" prop="instrument.volume">
-        <ng-template let-value="value" ngx-datatable-cell-template>
-            {{value | number:'1.0-0'}}
-        </ng-template>
-    </ngx-datatable-column>
-    <!--<ngx-datatable-column name="Day Avg buy" prop="intraday_average_buy_price">
+            <ngx-datatable-column name="Stock" prop="instrument">
+                <ng-template let-value="value" ngx-datatable-cell-template>
+                    <a [routerLink]="['/portfolio',value.symbol]" title="value.simple_name">{{value.symbol}}</a>
+                </ng-template>
+            </ngx-datatable-column>
+            <ngx-datatable-column name="Shares" prop="quantity">
+                <ng-template let-value="value" ngx-datatable-cell-template>
+                    {{value | number:'1.0-0'}}
+                </ng-template>
+            </ngx-datatable-column>
+            <ngx-datatable-column name="Equity" prop="equity">
+                <ng-template let-value="value" ngx-datatable-cell-template>
+                    {{value | currency:'USD':true:'1.0-0'}}
+                </ng-template>
+            </ngx-datatable-column>
+            <ngx-datatable-column name="Return" *ngIf="!viewToggle.checked" prop="return.total">
+                <ng-template let-value="value" ngx-datatable-cell-template>
+                    {{value | currency:'USD':true:'1.0-0'}}
+                </ng-template>
+            </ngx-datatable-column>
+            <ngx-datatable-column name="%" *ngIf="!viewToggle.checked" prop="return.totalPerc">
+                <ng-template let-value="value" ngx-datatable-cell-template>
+                    {{value | percent:'1.1-2' }}
+                </ng-template>
+            </ngx-datatable-column>
+            <ngx-datatable-column name="Return" *ngIf="viewToggle.checked" prop="return.today">
+                <ng-template let-value="value" ngx-datatable-cell-template>
+                    {{value | currency:'USD':true}}
+                </ng-template>
+            </ngx-datatable-column>
+            <ngx-datatable-column name="%" *ngIf="viewToggle.checked" prop="return.todayPerc">
+                <ng-template let-value="value" ngx-datatable-cell-template>
+                    {{value | percent:'1.1-2' }}
+                </ng-template>
+            </ngx-datatable-column>
+            <ngx-datatable-column name="Avg Cost" prop="average_buy_price">
+                <ng-template let-value="value" ngx-datatable-cell-template>
+                    {{value | currency:'USD':true:'1.2-2'}}
+                </ng-template>
+            </ngx-datatable-column>
+            <ngx-datatable-column name="Last Price" prop="instrument.last_trade_price">
+                <ng-template let-value="value" ngx-datatable-cell-template>
+                    {{value | currency:'USD':true:'1.2-2'}}
+                </ng-template>
+            </ngx-datatable-column>
+            <ngx-datatable-column name="Div" prop="instrument.dividend_yield">
+                <ng-template let-value="value" ngx-datatable-cell-template>
+                    {{(value) ? ((value/100) | percent: '1.1-2') : '0.0%' }}
+                </ng-template>
+            </ngx-datatable-column>
+            <ngx-datatable-column name="Day Volume" prop="instrument.volume">
+                <ng-template let-value="value" ngx-datatable-cell-template>
+                    {{value | number:'1.0-0'}}
+                </ng-template>
+            </ngx-datatable-column>
+            <!--<ngx-datatable-column name="Day Avg buy" prop="intraday_average_buy_price">
         <ng-template let-value="value" ngx-datatable-cell-template>
             {{value | currency:'USD':true:'1.2-3'}}
         </ng-template>
     </ngx-datatable-column>    -->
-    <ngx-datatable-column name="Created" prop="created_at">
-        <ng-template let-value="value" ngx-datatable-cell-template>
-            {{value | date:'shortDate' }}
-        </ng-template>
-    </ngx-datatable-column>
-
-
-</ngx-datatable>
+            <ngx-datatable-column name="Created" prop="created_at">
+                <ng-template let-value="value" ngx-datatable-cell-template>
+                    {{value | date:'shortDate' }}
+                </ng-template>
+            </ngx-datatable-column>
+        </ngx-datatable>
+    </md-card-content>
+</md-card>
