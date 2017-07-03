@@ -7,8 +7,11 @@
 * Portfolio grid view
 * Charts
 
-
 # How to start
+
+** IMPORTANT ** To run in web browser you will need disable Cross Domain check in order to interact the Robinhood API. For Chrome you can run:
+`"C:\Program Files (x86)\Google\Chrome\Application\chrome.exe" --disable-web-security --user-data-dir="c:/nocoors`
+
 * For tooling documentaiton please visit the angular-seed page https://github.com/mgechev/angular-seed/ 
 **Note** that this project requires node v4.x.x or higher and npm 2.14.7 but in order to be able to take advantage of the complete functionality we **strongly recommend node >=v6.5.0 and npm >=3.10.3**.
 
