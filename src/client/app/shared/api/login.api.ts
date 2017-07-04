@@ -47,7 +47,7 @@ export class LoginAPI {
         }
     }
     private goToDashboard() {
-        this._router.navigate(['about']);
+        this._router.navigate(['portfolio']);
     }
     private toToLogin() {
         this._router.navigate(['/']);

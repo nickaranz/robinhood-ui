@@ -7,8 +7,8 @@
         <p>All  <md-slide-toggle #viewToggle name="viewType" checked='true'>Today</md-slide-toggle></p>
     </md-card-content>
     <md-card-content>
-        <input type='text' placeholder='filter by symbol' (keyup)='search($event)' />
-        <button style='float:right' md-button>Export</button>
+        <input type='text' placeholder='Filter by symbol' (keyup)='filter($event)' />
+        <button style='float:right' (click)="export()" md-button>Export</button>
         <ngx-datatable class="material fullscreen" [rows]="positions$ | async" [loadingIndicator]="loadingIndicator" [columnMode]="'force'"
             [headerHeight]="50" [footerHeight]="50" [reorderable]="reorderable" [rowHeight]="50" [rowClass]="getRowClass">
 

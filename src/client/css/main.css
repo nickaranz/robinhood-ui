@@ -89,3 +89,17 @@ body .mat-slide-toggle.mat-checked:not(.mat-disabled) .mat-slide-toggle-thumb{
 .mat-slide-toggle.mat-checked:not(.mat-disabled) .mat-slide-toggle-bar{
     background-color: rgba(33, 206, 153, .5);
 }
+.ngx-datatable.material{
+    margin-top: .25em;
+}
+.ngx-datatable.material .empty-row {
+    height: auto;
+    text-align: center;    
+    padding: 1.5em;
+}
+body .ngx-datatable.material .datatable-body .progress-linear .container{
+    background-color: #90e6cc;
+}
+.ngx-datatable.material .datatable-body .progress-linear .container .bar{
+    background-color: #118863;
+}
