@@ -14,7 +14,7 @@
 
             <ngx-datatable-column name="Stock" prop="instrument">
                 <ng-template let-value="value" ngx-datatable-cell-template>
-                    <a [routerLink]="['/portfolio',value.symbol]" title="value.simple_name">{{value.symbol}}</a>
+                    <a [routerLink]="['/portfolio',value.id]" title="value.simple_name">{{value.symbol}}</a>
                 </ng-template>
             </ngx-datatable-column>
             <ngx-datatable-column name="Shares" prop="quantity">

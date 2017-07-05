@@ -24,7 +24,7 @@ export class ProjectConfig extends SeedConfig {
             ...this.NPM_DEPENDENCIES,
             // {src: 'jquery/dist/jquery.min.js', inject: 'libs'},
             // {src: 'lodash/lodash.min.js', inject: 'libs'},
-            {src: '@angular/material/prebuilt-themes/indigo-pink.css', inject: true}
+            { src: '@angular/material/prebuilt-themes/indigo-pink.css', inject: true }
         ];
 
         // Add `local` third-party libraries to be injected/bundled.
@@ -53,20 +53,29 @@ export class ProjectConfig extends SeedConfig {
             packageMeta: {
                 defaultExtension: 'js'
             }
-        },
-        {
+        }, {
             name: '@swimlane/ngx-datatable',
             path: 'node_modules/@swimlane/ngx-datatable/release/index.js'
-        }];
+        }, {
+            name: 'highcharts',
+            path: 'node_modules/highcharts',
+            packageMeta: {
+                main: './highcharts.js',
+                defaultExtension: 'js'
+            }
+        },
+        {
+            name: 'angular2-highcharts',
+            path: 'node_modules/angular2-highcharts',
+            packageMeta: {
+                 main: './index.js',
+                defaultExtension: 'js'
+            }
+        }
+        ];
 
         this.addPackagesBundles(additionalPackages);
-        // this.addPackageBundles({
-        //     name: '@swimlane/ngx-datatable',
-        //     path: 'node_modules/@swimlane/ngx-datatable',
-        //     packageMeta: {
-        //         defaultExtension: 'js'
-        //     }
-        // });
+        
 
         /* Add proxy middleware */
         // this.PROXY_MIDDLEWARE = [

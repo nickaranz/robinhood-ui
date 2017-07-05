@@ -86,6 +86,16 @@ export interface IInstrument extends IQuote {
     tradeable: boolean;
     url: string;
 }
+export interface IDayQuote{
+    begins_at : string;
+    open_price : number;
+    close_price : number;
+    high_price : number;
+    low_price : number;
+    volume : number;
+    session : string;
+    interpolated : boolean;
+}
 export interface IQuote {
     adjusted_previous_close: number;
     ask_price: number;
@@ -104,10 +114,10 @@ export interface IQuote {
     updated_at: Date;
 }
 export interface IPosition {
-    account: IAccount;//url
+    account: string;//url
     average_buy_price: number;
     created_at: Date;
-    instrument: IInstrument;//url
+    instrument: IInstrument;
     intraday_average_buy_price: number;
     intraday_quantity: number;
     quantity: number;
@@ -124,6 +134,18 @@ export interface IPosition {
         today: number,
         todayPerc: number,
     };
+}
+export interface IHistoricalQuote{
+    quote:string;//url
+    symbol:string;
+    interval:string;
+    span:string;
+    bounds:string;
+    previous_close_price:number;
+    open_price:number;
+    open_time:number;
+    instrument:string;//url
+    historicals: Array<IDayQuote>;
 }
 export interface IAccountResponse extends IPageCollection {
     results: Array<IAccount>

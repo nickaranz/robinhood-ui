@@ -1,3 +1,86 @@
-<div>
-    Showing  details for : {{symbol}}
-</div>
+<md-card class="instrument-card">
+    <md-card-title>{{instrument?.name}} ({{instrument?.symbol}})</md-card-title>
+    <md-card-content>
+        <p>{{instrument?.description}} </p>
+    </md-card-content>
+    <md-card-actions align="end">
+        <button md-button>Buy</button>
+        <button md-button>Sell</button>
+    </md-card-actions>
+</md-card>
+<md-card class="instrument-card" *ngIf="instrument">
+    <md-card-title>Fundamentals</md-card-title>
+    <md-card-content>
+        <table class="quote__data-table" summary="This table charts details of the selected quote">
+            <tbody>
+                <tr>
+                    <td scope="row" class="quote__data-label">Exchange</td>
+                    <td class="quote__data-value">{{instrument?.market.acronym}}</td>
+                </tr>
+                <tr>
+                    <td scope="row" class="quote__data-label">Shares</td>
+                    <td class="quote__data-value">{{(instrument?.market_cap / instrument?.last_trade_price) | largeMoney}}</td>
+                </tr>
+                <tr>
+                    <td scope="row" class="quote__data-label">Market Cap</td>
+                    <td class="quote__data-value">{{instrument?.market_cap | largeMoney }}</td>
+                </tr>              
+                <tr>
+                    <td scope="row" class="quote__data-label">P/E Ratio</td>
+                    <td class="quote__data-value">                        
+                        {{instrument?.pe_ratio | number:'1.0-0'}}
+                    </td>
+                </tr>
+                <tr class="idc-oddrow idc-lastrow">
+                    <td scope="row" class="quote__data-label">Div &amp; Yield</td>
+                    <td class="quote__data-value">
+                        {{(instrument?.dividend_yield/100) | percent: '1.1-2'}}
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </md-card-content>
+</md-card>
+
+<md-card class="instrument-card">
+    <md-card-content>
+        <chart type="StockChart" [options]="options"></chart>
+    </md-card-content>
+</md-card>
+<md-card class="instrument-card">
+    <md-card-title>Quote</md-card-title>
+    <md-card-content>
+        <table class="quote__data-table" summary="This table charts details of the selected quote">
+            <tbody>
+                <tr>
+                    <td scope="row" class="quote__data-label">Prev Close</td>
+                    <td class="quote__data-value"> {{instrument?.previous_close | number:'1.0-3'}}</td>
+                </tr>
+                <tr>
+                    <td scope="row" class="quote__data-label">Open</td>
+                    <td class="quote__data-value">{{instrument?.open | number:'1.0-3'}}</td>
+                </tr>
+                <tr>
+                    <td scope="row" class="quote__data-label">Day Low/High</td>
+                    <td class="quote__data-value">
+                        {{instrument?.low | number:'1.0-3'}} / {{instrument?.high | number:'1.0-3'}}
+                    </td>
+                </tr>
+                <tr>
+                    <td scope="row" class="quote__data-label">52 Wk Low/High</td>
+                    <td class="quote__data-value">
+                        {{instrument?.low_52_weeks| number:'1.0-3'}} / {{instrument?.high_52_weeks| number:'1.0-3'}}
+                    </td>
+                </tr>
+                <tr>
+                    <td scope="row" class="quote__data-label">Volume</td>
+                    <td class="quote__data-value market-data-item">{{instrument?.volume | largeMoney}}</td>
+                </tr>
+                <tr>
+                    <td scope="row" class="quote__data-label">Avg Volume </td>
+                    <td class="quote__data-value">{{instrument?.average_volume | largeMoney}}</td>
+                </tr>
+            </tbody>
+        </table>
+    </md-card-content>
+</md-card>

@@ -1,9 +1,9 @@
 {
-  "name": "angular-seed",
+  "name": "robinhood-ui",
   "version": "1.0.0",
-  "description": "Modular starter project for Angular 2 (and beyond) with statically typed build and AoT compilation",
+  "description": "robinhood desktop",
   "repository": {
-    "url": "https://github.com/mgechev/angular-seed"
+    "url": "https://github.com/nickaranz/robinhood-ui"
   },
   "scripts": {
     "build.dev": "gulp build.dev --color --env-config dev",
@@ -147,7 +147,8 @@
     "@angular/router": "^4.2.3",
     "@angular/service-worker": "^1.0.0-beta.16",
     "@swimlane/ngx-datatable": "^9.3.0",
-    "core-js": "^2.4.1",
+    "angular2-highcharts" : "0.5.5",
+    "core-js": "^2.4.1",    
     "intl": "^1.2.5",
     "rxjs": "^5.2.0",
     "systemjs": "0.20.14",

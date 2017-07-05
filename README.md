@@ -7,8 +7,12 @@
 * Login with support for two factor auth.
 * Export positions as CSV
 * Export transaction data as CSV
-* Portfolio grid view
-* Charts
+* Portfolio grid (filter, sorting)
+* Charting with HighCharts
+* Individual Stock view
+* Buy Sell
+
+![Robinhood Portfolio](src/client/assets/instrument.PNG "Robinhood Portfolio")
 
 # How to start
 
